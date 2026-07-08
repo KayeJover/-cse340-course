@@ -151,48 +151,19 @@ SELECT * FROM category;
 
 INSERT INTO project_category (project_id, category_id)
 VALUES
--- Project 1
-(1, 1),
-
--- Project 2
-(2, 3),
-
--- Project 3
-(3, 1),
-
--- Project 4
-(4, 5),
-
--- Project 5
-(5, 1),
-
--- Project 6
-(6, 2),
-
--- Project 7
-(7, 2),
-
--- Project 8
-(8, 3),
-
--- Project 9
-(9, 2),
-
--- Project 10
-(10, 2),
-
--- Project 11
-(11, 1),
-
--- Project 12
-(12, 4),
-
--- Project 13
-(13, 4),
-
--- Project 14
-(14, 3),
-
--- Project 15
-(15, 1);
+(1,1),
+(2,3),
+(3,1),
+(4,5),
+(5,1),
+(6,2),
+(7,2),
+(8,3),
+(9,2),
+(10,2),
+(11,1),
+(12,4),
+(13,4),
+(14,3),
+(15,1);
 SELECT * FROM project_category;

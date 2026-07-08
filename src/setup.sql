@@ -106,3 +106,93 @@ VALUES
  'Bohol', '2026-12-15');
 
  SELECT * FROM project;
+
+-- ========================================
+-- Category Table
+-- ========================================
+
+ CREATE TABLE category (
+    category_id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE project_category (
+    project_id INTEGER NOT NULL,
+    category_id INTEGER NOT NULL,
+
+    PRIMARY KEY (project_id, category_id),
+
+    CONSTRAINT fk_project
+        FOREIGN KEY (project_id)
+        REFERENCES project(project_id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_category
+        FOREIGN KEY (category_id)
+        REFERENCES category(category_id)
+        ON DELETE CASCADE
+);
+-- =========================================
+-- Insert sample categories
+-- =========================================
+
+INSERT INTO category (name)
+VALUES
+('Community Service'),
+('Environmental'),
+('Education'),
+('Health'),
+('Disaster Relief');
+SELECT * FROM category;
+
+-- =========================================
+-- Associate projects with categories
+-- =========================================
+
+INSERT INTO project_category (project_id, category_id)
+VALUES
+-- Project 1
+(1, 1),
+
+-- Project 2
+(2, 3),
+
+-- Project 3
+(3, 1),
+
+-- Project 4
+(4, 5),
+
+-- Project 5
+(5, 1),
+
+-- Project 6
+(6, 2),
+
+-- Project 7
+(7, 2),
+
+-- Project 8
+(8, 3),
+
+-- Project 9
+(9, 2),
+
+-- Project 10
+(10, 2),
+
+-- Project 11
+(11, 1),
+
+-- Project 12
+(12, 4),
+
+-- Project 13
+(13, 4),
+
+-- Project 14
+(14, 3),
+
+-- Project 15
+(15, 1);
+SELECT * FROM project_category;

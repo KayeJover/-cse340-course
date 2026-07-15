@@ -31,6 +31,19 @@
         </p>
 
         <p>
+            <strong>Categories:</strong>
+
+            <% categories.forEach((category, index)=> { %>
+
+                <a href="/category/<%= category.category_id %>">
+                    <%= category.name %>
+                </a>
+                <%= index < categories.length - 1 ? ', ' : '' %>
+
+                    <% }) %>
+        </p>
+
+        <p>
             <a href="/projects">← Back to Projects</a>
         </p>
 

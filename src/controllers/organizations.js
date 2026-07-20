@@ -1,7 +1,7 @@
 import {
     getAllOrganizations,
     getOrganizationDetails,
-    getcreateOrganization
+    createOrganization
 } from '../models/organizations.js';
 
 import { getProjectsByOrganizationId } from '../models/projects.js';

@@ -24,6 +24,7 @@ import {
 } from './controllers/categories.js';
 
 import { testErrorPage } from './controllers/errors.js';
+import { showUserRegistrationForm, processUserRegistrationForm } from './controllers/users.js';
 import {
     showOrganizationDetailsPage,
     showNewOrganizationForm,
@@ -84,6 +85,11 @@ router.post(
     categoryValidation,
     processEditCategoryForm
 );
+
+// User registration routes
+router.get('/register', showUserRegistrationForm);
+router.post('/register', processUserRegistrationForm);
+
 // error-handling routes
 router.get('/test-error', testErrorPage);
 

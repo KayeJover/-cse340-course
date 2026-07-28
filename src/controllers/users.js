@@ -72,10 +72,6 @@ const requireLogin = (req, res, next) => {
     next();
 };
 
-module.exports = {
-    // ... other exports
-    requireLogin
-};
 
 const showDashboard = (req, res) => {
     const user = req.session.user;

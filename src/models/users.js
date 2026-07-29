@@ -1,4 +1,5 @@
-import db from './db.js'
+import bcrypt from 'bcrypt';
+import db from './db.js';
 
 const createUser = async (name, email, passwordHash) => {
     const default_role = 'user';
@@ -23,10 +24,16 @@ const createUser = async (name, email, passwordHash) => {
 };
 
 const findUserByEmail = async (email) => {
-    const query = `
-    SELECT u.user_id, u.email, u.password_hash, r.role_name 
+  const query = `
+    SELECT
+        u.user_id,
+        u.name,
+        u.email,
+        u.password_hash,
+        r.role_name
     FROM users u
-    JOIN roles r ON u.role_id = r.role_id
+    JOIN roles r
+        ON u.role_id = r.role_id
     WHERE u.email = $1
 `;
     const queryParams = [email];

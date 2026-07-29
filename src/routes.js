@@ -31,7 +31,8 @@ import {
     processLoginForm,
     processLogout,
     requireLogin,
-    showDashboard
+    showDashboard,
+    requireRole
 } from './controllers/users.js';
 import {
     showOrganizationDetailsPage,
@@ -53,43 +54,88 @@ router.get('/category/:id', showCategoryDetailsPage);
 router.get('/organization/:id', showOrganizationDetailsPage);
 
 // Route for new organization page
-router.get('/new-organization', showNewOrganizationForm);
+router.get('/new-organization', requireRole('admin'),  showNewOrganizationForm);
 // Route to handle new organization form submission
-router.post('/new-organization', organizationValidation, processNewOrganizationForm);
+router.post('/new-organization', requireRole('admin'), organizationValidation, processNewOrganizationForm);
 
 // Route to display the edit organization form
-router.get('/edit-organization/:id', showEditOrganizationForm);
-// Route to handle the edit organization form submission
-router.post('/edit-organization/:id', organizationValidation, processEditOrganizationForm);
+router.get(
+    '/edit-organization/:id',
+    requireRole('admin'),
+    showEditOrganizationForm
+);
+
+router.post(
+    '/edit-organization/:id',
+    requireRole('admin'),
+    organizationValidation,
+    processEditOrganizationForm
+);
 
 // Route for new project page
-router.get('/new-project', showNewProjectForm);
-// Route to handle new project form submission
-router.post('/new-project', projectValidation, processNewProjectForm);
+router.get(
+    '/new-project',
+    requireRole('admin'),
+    showNewProjectForm
+);
+
+router.post(
+    '/new-project',
+    requireRole('admin'),
+    projectValidation,
+    processNewProjectForm
+);
 
 // Routes to handle the assign categories to project form
-router.get('/assign-categories/:projectId', showAssignCategoriesForm);
-router.post('/assign-categories/:projectId', processAssignCategoriesForm);
+router.get(
+    '/assign-categories/:projectId',
+    requireRole('admin'),
+    showAssignCategoriesForm
+);
 
-router.get('/edit-project/:id', showEditProjectForm);
-router.post('/edit-project/:id', projectValidation, processEditProjectForm);
+router.post(
+    '/assign-categories/:projectId',
+    requireRole('admin'),
+    processAssignCategoriesForm
+);
+
+router.get(
+    '/edit-project/:id',
+    requireRole('admin'),
+    showEditProjectForm
+);
+
+router.post(
+    '/edit-project/:id',
+    requireRole('admin'),
+    projectValidation,
+    processEditProjectForm
+);
 
 // Display the new category form
-router.get('/new-category', showNewCategoryForm);
+router.get(
+    '/new-category',
+    requireRole('admin'),
+    showNewCategoryForm
+);
 
-// Process the new category form
 router.post(
     '/new-category',
+    requireRole('admin'),
     categoryValidation,
     processNewCategoryForm
 );
 
 // Display the edit category form
-router.get('/edit-category/:id', showEditCategoryForm);
+router.get(
+    '/edit-category/:id',
+    requireRole('admin'),
+    showEditCategoryForm
+);
 
-// Process the edit category form
 router.post(
     '/edit-category/:id',
+    requireRole('admin'),
     categoryValidation,
     processEditCategoryForm
 );

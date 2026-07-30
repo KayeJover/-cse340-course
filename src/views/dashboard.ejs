@@ -1,12 +1,24 @@
 <%- include('partials/header') %>
 
-<main>
-    <h1><%= title %></h1>
+    <main>
+        <h1>
+            <%= title %>
+        </h1>
 
-    <h2>Dashboard</h2>
-    <p>Name: <%= name %></p>
-    <p>Username: <%= email %></p>
+        <h2>Dashboard</h2>
+        <p>Name: <%= name %>
+        </p>
+        <p>Username: <%= email %>
+        </p>
 
-</main>
+        <% if (user && user.role_name==='admin' ) { %>
+            <h2>Administration</h2>
 
-<%- include('partials/footer') %>
+            <p>
+                <a href="/users">View All Users</a>
+            </p>
+            <% } %>
+
+    </main>
+
+    <%- include('partials/footer') %>

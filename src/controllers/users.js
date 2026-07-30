@@ -1,5 +1,7 @@
 import bcrypt from 'bcrypt';
-import { createUser, authenticateUser } from '../models/users.js';
+import {
+    createUser, authenticateUser, getAllUsers
+} from '../models/users.js';
 
 const showUserRegistrationForm = (req, res) => {
     res.render('register', { title: 'Register' });
@@ -76,10 +78,11 @@ const requireLogin = (req, res, next) => {
 const showDashboard = (req, res) => {
     const user = req.session.user;
     res.render('dashboard', {
-        title: 'Dashboard',
-        name: user.name,
-        email: user.email
-    });
+    title: 'Dashboard',
+    name: user.name,
+    email: user.email,
+    user
+});
 };
 
 /**
@@ -107,4 +110,32 @@ const requireRole = (role) => {
         next();
     };
 };
-export { showUserRegistrationForm, processUserRegistrationForm, showLoginForm, processLoginForm, processLogout, requireLogin, showDashboard, requireRole };
+
+const showUsersPage = async (req, res) => {
+    try {
+        const users = await getAllUsers();
+
+        res.render('users', {
+            title: 'Users',
+            users,
+            user: req.session.user
+        });
+    } catch (error) {
+        console.error('Error loading users:', error);
+
+        req.flash('error', 'Unable to load users.');
+
+        res.redirect('/dashboard');
+    }
+};
+export {
+    showUserRegistrationForm,
+    processUserRegistrationForm,
+    showLoginForm,
+    processLoginForm,
+    processLogout,
+    requireLogin,
+    requireRole,
+    showDashboard,
+    showUsersPage
+};

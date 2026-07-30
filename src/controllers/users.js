@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import {
-    createUser, authenticateUser, getAllUsers
+    createUser, authenticateUser, getAllUsers, updateUserRole
 } from '../models/users.js';
 
 const showUserRegistrationForm = (req, res) => {
@@ -128,6 +128,23 @@ const showUsersPage = async (req, res) => {
         res.redirect('/dashboard');
     }
 };
+
+const processUserRoleUpdate = async (req, res) => {
+    const { userId, roleId } = req.body;
+
+    try {
+        await updateUserRole(userId, roleId);
+
+        req.flash('success', 'User role updated successfully.');
+        res.redirect('/users');
+    } catch (error) {
+        console.error(error);
+
+        req.flash('error', 'Unable to update user role.');
+        res.redirect('/users');
+    }
+};
+
 export {
     showUserRegistrationForm,
     processUserRegistrationForm,
@@ -137,5 +154,6 @@ export {
     requireLogin,
     requireRole,
     showDashboard,
-    showUsersPage
+    showUsersPage,
+    processUserRoleUpdate
 };

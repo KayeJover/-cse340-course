@@ -83,8 +83,19 @@ const getAllUsers = async () => {
     return result.rows;
 };
 
+const updateUserRole = async (userId, roleId) => {
+    const query = `
+        UPDATE users
+        SET role_id = $1
+        WHERE user_id = $2
+    `;
+
+    await db.query(query, [roleId, userId]);
+};
+
 export {
     createUser,
     authenticateUser,
-    getAllUsers
+    getAllUsers,
+    updateUserRole
 };

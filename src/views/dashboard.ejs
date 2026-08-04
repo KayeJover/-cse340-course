@@ -1,23 +1,32 @@
-<%- include('partials/header') %>
+<h2>My Volunteer Projects</h2>
 
-    <main>
-        <h1>
-            <%= title %>
-        </h1>
+<% if (volunteerProjects.length === 0) { %>
 
-        <p>Name: <%= name %>
-        </p>
-        <p>Username: <%= email %>
-        </p>
+    <p>You have not volunteered for any projects yet.</p>
 
-        <% if (user && user.role_name==='admin' ) { %>
-            <h2>Administration</h2>
+<% } else { %>
 
-            <p>
-                <a href="/users">View All Users</a>
-            </p>
-            <% } %>
+    <ul>
 
-    </main>
+        <% volunteerProjects.forEach(project => { %>
 
-    <%- include('partials/footer') %>
+            <li>
+
+                <a href="/project/<%= project.project_id %>">
+                    <%= project.title %>
+                </a>
+
+                (<%= new Date(project.project_date).toLocaleDateString() %>)
+
+                -
+                <a href="/remove-volunteer/<%= project.project_id %>">
+                    Remove
+                </a>
+
+            </li>
+
+        <% }) %>
+
+    </ul>
+
+<% } %>

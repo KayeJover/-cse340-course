@@ -49,11 +49,8 @@
                 </a>
                 <% } %>
         </p>
-        <p>
-            <a href="/projects">← Back to Projects</a>
-        </p>
 
-        <% if (isLoggedIn) { %>
+         <% if (isLoggedIn) { %>
 
             <% if (!volunteering) { %>
 
@@ -77,6 +74,11 @@
 
                         <% } %>
 
+        <p>
+            <a href="/projects">← Back to Projects</a>
+        </p>
+
+       
     </main>
 
     <%- include('partials/footer') %>

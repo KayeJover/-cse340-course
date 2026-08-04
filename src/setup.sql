@@ -182,3 +182,24 @@ INSERT INTO roles (role_name, role_description) VALUES
 
 -- Verify the data was inserted
 SELECT * FROM roles;
+
+-- ========================================
+-- Volunteer Table
+-- ========================================
+
+CREATE TABLE volunteer (
+    user_id INTEGER NOT NULL,
+    project_id INTEGER NOT NULL,
+
+    PRIMARY KEY (user_id, project_id),
+
+    CONSTRAINT fk_volunteer_user
+        FOREIGN KEY (user_id)
+        REFERENCES users(user_id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_volunteer_project
+        FOREIGN KEY (project_id)
+        REFERENCES project(project_id)
+        ON DELETE CASCADE
+);

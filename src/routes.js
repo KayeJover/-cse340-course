@@ -9,7 +9,9 @@ import {
     processNewProjectForm,
     showEditProjectForm,
     processEditProjectForm,
-    projectValidation
+    projectValidation,
+    volunteerForProject,
+    removeVolunteerFromProject
 } from './controllers/projects.js';
 import {
     showCategoriesPage,
@@ -50,12 +52,23 @@ router.get('/', showHomePage);
 router.get('/organizations', showOrganizationsPage);
 router.get('/projects', showProjectsPage);
 router.get('/project/:id', showProjectDetailsPage);
+router.get(
+    '/volunteer/:id',
+    requireLogin,
+    volunteerForProject
+);
+
+router.get(
+    '/remove-volunteer/:id',
+    requireLogin,
+    removeVolunteerFromProject
+);
 router.get('/categories', showCategoriesPage);
 router.get('/category/:id', showCategoryDetailsPage);
 router.get('/organization/:id', showOrganizationDetailsPage);
 
 // Route for new organization page
-router.get('/new-organization', requireRole('admin'),  showNewOrganizationForm);
+router.get('/new-organization', requireRole('admin'), showNewOrganizationForm);
 // Route to handle new organization form submission
 router.post('/new-organization', requireRole('admin'), organizationValidation, processNewOrganizationForm);
 

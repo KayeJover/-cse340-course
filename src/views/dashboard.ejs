@@ -1,32 +1,69 @@
-<h2>My Volunteer Projects</h2>
+<%- include('partials/header') %>
 
-<% if (volunteerProjects.length === 0) { %>
+<main>
 
-    <p>You have not volunteered for any projects yet.</p>
+    <h1><%= title %></h1>
 
-<% } else { %>
+    <h2>User Information</h2>
 
-    <ul>
+    <p>
+        <strong>Name:</strong>
+        <%= user.name %>
+    </p>
 
-        <% volunteerProjects.forEach(project => { %>
+    <p>
+        <strong>Email:</strong>
+        <%= user.email %>
+    </p>
 
-            <li>
+    <p>
+        <strong>Role:</strong>
+        <%= user.role_name %>
+    </p>
 
-                <a href="/project/<%= project.project_id %>">
-                    <%= project.title %>
-                </a>
+    <hr>
 
-                (<%= new Date(project.project_date).toLocaleDateString() %>)
+    <h2>My Volunteer Projects</h2>
 
-                -
-                <a href="/remove-volunteer/<%= project.project_id %>">
-                    Remove
-                </a>
+    <% if (volunteerProjects.length === 0) { %>
 
-            </li>
+        <p>You have not volunteered for any projects yet.</p>
 
-        <% }) %>
+    <% } else { %>
 
-    </ul>
+        <ul>
 
-<% } %>
+            <% volunteerProjects.forEach(project => { %>
+
+                <li>
+
+                    <a href="/project/<%= project.project_id %>">
+                        <%= project.title %>
+                    </a>
+
+                    (<%= new Date(project.project_date).toLocaleDateString() %>)
+
+                    <a href="/remove-volunteer/<%= project.project_id %>">
+                        Remove
+                    </a>
+
+                </li>
+
+            <% }) %>
+
+        </ul>
+
+    <% } %>
+
+    <hr>
+
+    <p>
+        <a href="/">Home</a> |
+        <a href="/organizations">Organizations</a> |
+        <a href="/projects">Projects</a> |
+        <a href="/categories">Categories</a>
+    </p>
+
+</main>
+
+<%- include('partials/footer') %>

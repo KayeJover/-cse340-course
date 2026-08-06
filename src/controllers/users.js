@@ -84,8 +84,6 @@ const showDashboard = async (req, res) => {
 
     res.render('dashboard', {
         title: 'Dashboard',
-        name: user.name,
-        email: user.email,
         user,
         volunteerProjects
     });
